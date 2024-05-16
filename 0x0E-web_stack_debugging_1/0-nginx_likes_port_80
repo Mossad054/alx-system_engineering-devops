@@ -1,9 +1,6 @@
 #!/usr/bin/env bash
-#  configuration of nginx to listen on port 80
+# debugging nginx port 80
 
-# remove default nginx file config
-rm /etc/nginx/sites-enabled/default
-# nginx config  to listen on port 80.
-ln -s /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
-# nginx restart
-service nginx restart
+# flag -s to create a symbolic link,and-f delete existing file and replaces it
+sudo ln -sf /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
+sudo service nginx restart
