@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
-# debugging nginx port 80
-
-# flag -s to create a symbolic link,and-f delete existing file and replaces it
-sudo ln -sf /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
+# getting server to curl port 80
+apt-get update
+apt-get -y install curl
+rm /etc/nginx/sites-available/*
+rm /etc/nginx/sites-enabled/*~
+sed -i 's/8080/80/g' /etc/nginx/sites-enabled/default
 sudo service nginx restart
