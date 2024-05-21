@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+
+display_subdomain_info() {
+    local subdomain="$1"
+    local dig_output
+    dig_output=$(dig "$subdomain.$domain" +short)
+    read -r record_type destination <<< "$dig_output"
+    echo "The subdomain $subdomain is a $record_type record and points to $destination"
+}
+
+domain="$1"
+
+if [ -z "$2" ]; then
+    for subdomain in www lb-01 web-01 web-02; do
+        display_subdomain_info "$subdomain"
+    done
+else
+    subdomain="$2"
+    display_subdomain_info "$subdomain"
+fi
