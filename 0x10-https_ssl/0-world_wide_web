@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-
+# check domain txt and return results
 display_subdomain_info() {
     local subdomain="$1"
     local dig_output
