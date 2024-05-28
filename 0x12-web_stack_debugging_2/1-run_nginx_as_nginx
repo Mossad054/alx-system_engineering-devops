@@ -1,0 +1,17 @@
+#!/bin/bash
+
+# Change ownership of Nginx directories to nginx user
+chown -R nginx:nginx /var/log/nginx /var/lib/nginx /var/www/html
+
+# Change ownership of Nginx configuration files to nginx user
+chown nginx:nginx /etc/nginx/nginx.conf /etc/nginx/sites-available/default
+
+# Modify Nginx configuration to run as nginx user
+sed -i 's/user www-data;/user nginx;/' /etc/nginx/nginx.conf
+
+# Modify Nginx default site configuration to listen on all active IPs on port 8080
+sed -i 's/listen 80 default_server;/listen 8080 default_server;/g' /etc/nginx/sites-available/default
+
+# Restart Nginx service
+service nginx restart
+
